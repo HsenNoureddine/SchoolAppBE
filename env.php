@@ -20,6 +20,9 @@ function createDB($CON,$DBNAME)
     if ((mysqli_query($CON, $DBsql))) {
         if (mysqli_warning_count($CON) == 0) { 
              echo "Database created successfully";
+             echo "<br/>";
+
+             $CON->query("USE ".$DBNAME);
 
              $CON->query("CREATE TABLE USERS(
                 userid int not null auto_increment,
@@ -64,53 +67,58 @@ function createDB($CON,$DBNAME)
             );");
 
             $CON->query("CREATE TABLE ASSIGNMENTS(
+                assignmentid int not null auto_increment,
                 classid int not null,
                 date DATE not null,
                 assignment varchar(1000) not null,
-                PRIMARY KEY(classid,assignment),
+                PRIMARY KEY(assignmentid),
                 FOREIGN KEY(classid) REFERENCES CLASSES(classid)
             );");
 
             $CON->query("CREATE TABLE CALENDAR(
+                eventid int not null auto_increment,
                 classid int not null,
                 date DATE not null,
                 event varchar(1000) not null,
-                PRIMARY KEY(classid,event),
+                PRIMARY KEY(eventid),
                 FOREIGN KEY(classid) REFERENCES CLASSES(classid)
             );");
 
             $CON->query("CREATE TABLE DOCUMENTS(
+                documentid int not null auto_increment,
                 classid int not null,
                 filePath varchar(1000) not null,
                 subjectid int not null,
-                PRIMARY KEY(classid,filePath),
+                PRIMARY KEY(documentid),
                 FOREIGN KEY(subjectid) REFERENCES SUBJECTS(subjectid),
                 FOREIGN KEY(classid) REFERENCES CLASSES(classid)
             );");
 
             $CON->query("CREATE TABLE EXAMS(
+                examid int not null auto_increment, 
                 classid int not null,
                 date DATE not null,
                 exam varchar(1000) not null,
                 subjectid int not null,
-                PRIMARY KEY(classid,exam),
+                PRIMARY KEY(examid),
                 FOREIGN KEY(classid) REFERENCES CLASSES(classid),
                 FOREIGN KEY(subjectid) REFERENCES SUBJECTS(subjectid)
             );");
 
             $CON->query("CREATE TABLE NEWS(
+                newsid int not null auto_increment, 
                 classid int not null,
                 date DATE not null,
                 news varchar(1000) not null,
                 subjectid int not null,
-                PRIMARY KEY(classid,news),
+                PRIMARY KEY(newsid),
                 FOREIGN KEY(classid) REFERENCES CLASSES(classid),
                 FOREIGN KEY(subjectid) REFERENCES SUBJECTS(subjectid)
             );");
 
             $CON->query("CREATE TABLE GRADES(
                 classid int not null,
-                userid DATE not null,
+                userid int not null,
                 grade float not null,
                 subjectid int not null,
                 title varchar(100) not null,
@@ -127,6 +135,9 @@ function createDB($CON,$DBNAME)
                 PRIMARY KEY(classid,dateTime),
                 FOREIGN KEY(classid) REFERENCES CLASSES(classid)
             );");
+
+            echo "tables created successfully";
+
         }
     } else {
         echo "Error creating database: " . mysqli_error($CON);
