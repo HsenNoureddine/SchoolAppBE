@@ -5,28 +5,26 @@ abstract class Model extends Connection{
     protected $tableName;
     public function selectAll()
     {
-        $this->CON->query("Select * from ".$this->tableName);
+        return $this->CON->query("Select * from `".$this->tableName."`");
     }
     
     public function selectWhere($condition)
     {
         if($condition == "")
-            $this->CON->query("Select * from ".$this->tableName." where ".$condition);
+            return $this->CON->query("Select * from `".$this->tableName."` where ".$condition);
         else
-            $this->CON->query("Select * from ".$this->tableName);
+            return $this->CON->query("Select * from `".$this->tableName."`");
     }
     
     public function selectAttributeWhere($attributes,$condition)
     {
         if($condition == "")
-            $this->CON->query("Select ".$attributes." from ".$this->tableName." where ".$condition);
+            return $this->CON->query("Select ".$attributes." from `".$this->tableName."` where ".$condition);
         else
-            $this->CON->query("Select ".$attributes." from ".$this->tableName);
+            return $this->CON->query("Select ".$attributes." from `".$this->tableName."`");
     }
 
-
-
-    public function update()
+    public function update($condition,$attributesAssoc)
     {
 
     }
