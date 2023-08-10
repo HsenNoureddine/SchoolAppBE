@@ -1,5 +1,5 @@
 <?php
-require("env.php");
+require("Connection.php");
 
 //init
 
