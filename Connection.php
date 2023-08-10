@@ -5,10 +5,15 @@ class Connection{
     private $PASSWORD = "";
     private $HOST = "Localhost";
     
-    protected $CON = new mysqli($HOST,$USERNAME,$PASSWORD);
+    
+    protected $CON;
     
     private $DBNAME = "SchoolDB";
-    
+    public function __construct()
+    {
+        $this->CON = new mysqli($this->HOST, $this->USERNAME, $this->PASSWORD);
+    }
+
     public function createDB()
     {
         //query to create db
@@ -143,4 +148,3 @@ class Connection{
         }
     }
 }
-?>
