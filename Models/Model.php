@@ -2,11 +2,7 @@
 
 abstract class Model extends Connection{
 
-    private $tableName;
-    public function __construct($tableName)
-    {
-        $this->tableName = $tableName;
-    }
+    protected $tableName;
     public function selectAll()
     {
         $this->CON->query("Select * from ".$this->tableName);
