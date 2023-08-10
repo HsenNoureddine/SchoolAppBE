@@ -16,14 +16,14 @@ class Connection{
     
     
         //check if db already exists
-        if ((mysqli_query($CON, $DBsql))) {
-            if (mysqli_warning_count($CON) == 0) { 
+        if ((mysqli_query($this->CON, $DBsql))) {
+            if (mysqli_warning_count($this->CON) == 0) { 
                  echo "Database created successfully";
                  echo "<br/>";
     
-                 $CON->query("USE ".$DBNAME);
+                 $this->CON->query("USE ".$this->DBNAME);
     
-                 $CON->query("CREATE TABLE USERS(
+                 $this->CON->query("CREATE TABLE USERS(
                     userid int not null auto_increment,
                     fullname varchar(20) not null,
                     email varchar(25),
@@ -32,7 +32,7 @@ class Connection{
                     PRIMARY KEY(userid)
                 );");
     
-                $CON->query("CREATE TABLE CLASSES(
+                $this->CON->query("CREATE TABLE CLASSES(
                     classid int not null auto_increment,
                     name varchar(20) not null,
                     code varchar(20) not null,  
@@ -40,14 +40,14 @@ class Connection{
                     PRIMARY KEY(classid)
                 );");
     
-                $CON->query("CREATE TABLE SUBJECTS(
+                $this->CON->query("CREATE TABLE SUBJECTS(
                     subjectid int not null auto_increment,
                     classid int not null,
                     name varchar(20) not null,
                     PRIMARY KEY(subjectid)
                 );");
     
-                $CON->query("CREATE TABLE USERCLASSES(
+                $this->CON->query("CREATE TABLE USERCLASSES(
                     classid int not null,
                     userid int not null,
                     FOREIGN KEY(userid) REFERENCES USERS(userid),
@@ -55,7 +55,7 @@ class Connection{
                     PRIMARY KEY(classid,userid)
                 );");
     
-                $CON->query("CREATE TABLE TEACHERS(
+                $this->CON->query("CREATE TABLE TEACHERS(
                     classid int not null,
                     userid int not null,
                     subjectid int not null,
@@ -65,7 +65,7 @@ class Connection{
                     PRIMARY KEY(classid,userid,subjectid)
                 );");
     
-                $CON->query("CREATE TABLE ASSIGNMENTS(
+                $this->CON->query("CREATE TABLE ASSIGNMENTS(
                     assignmentid int not null auto_increment,
                     classid int not null,
                     date DATE not null,
@@ -74,7 +74,7 @@ class Connection{
                     FOREIGN KEY(classid) REFERENCES CLASSES(classid)
                 );");
     
-                $CON->query("CREATE TABLE CALENDAR(
+                $this->CON->query("CREATE TABLE CALENDAR(
                     eventid int not null auto_increment,
                     classid int not null,
                     date DATE not null,
@@ -83,7 +83,7 @@ class Connection{
                     FOREIGN KEY(classid) REFERENCES CLASSES(classid)
                 );");
     
-                $CON->query("CREATE TABLE DOCUMENTS(
+                $this->CON->query("CREATE TABLE DOCUMENTS(
                     documentid int not null auto_increment,
                     classid int not null,
                     filePath varchar(1000) not null,
@@ -93,7 +93,7 @@ class Connection{
                     FOREIGN KEY(classid) REFERENCES CLASSES(classid)
                 );");
     
-                $CON->query("CREATE TABLE EXAMS(
+                $this->CON->query("CREATE TABLE EXAMS(
                     examid int not null auto_increment, 
                     classid int not null,
                     date DATE not null,
@@ -104,7 +104,7 @@ class Connection{
                     FOREIGN KEY(subjectid) REFERENCES SUBJECTS(subjectid)
                 );");
     
-                $CON->query("CREATE TABLE NEWS(
+                $this->CON->query("CREATE TABLE NEWS(
                     newsid int not null auto_increment, 
                     classid int not null,
                     date DATE not null,
@@ -115,7 +115,7 @@ class Connection{
                     FOREIGN KEY(subjectid) REFERENCES SUBJECTS(subjectid)
                 );");
     
-                $CON->query("CREATE TABLE GRADES(
+                $this->CON->query("CREATE TABLE GRADES(
                     classid int not null,
                     userid int not null,
                     grade float not null,
@@ -127,7 +127,7 @@ class Connection{
                     FOREIGN KEY(subjectid) REFERENCES SUBJECTS(subjectid)
                 );");
     
-                $CON->query("CREATE TABLE NOTIFICATIONS(
+                $this->CON->query("CREATE TABLE NOTIFICATIONS(
                     classid int not null,
                     dateTime DATETIME not null,
                     event varchar(1000) not null,
@@ -139,7 +139,7 @@ class Connection{
     
             }
         } else {
-            echo "Error creating database: " . mysqli_error($CON);
+            echo "Error creating database: " . mysqli_error($this->CON);
         }
     }
 }
