@@ -45,6 +45,17 @@ abstract class Model extends Connection{
 
     public function update($condition,$attributesAssoc)
     {
+        $flag = 0;
+        $query = "UPDATE `".$this->tableName."` SET ";
+        foreach($attributesAssoc as $col => $value)
+        {
+            if($flag) 
+                $query .= ",";
+            $query .= "`".$col."`='".$value."'";
+            $flag = 1;
+        }
+        $query .= " WHERE "."$condition";
+        return $this->CON->query($query);
       
     }
     public function insert()
