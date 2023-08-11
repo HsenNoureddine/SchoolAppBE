@@ -6,5 +6,12 @@ class UsersController extends Controller
     {
         Parent::__construct("Users");
     }
+    public function signIn($values)
+    {
+
+    }
+    public function signUp($values)
+    {
+    }
 }
 ?>

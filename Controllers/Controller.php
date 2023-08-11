@@ -13,27 +13,27 @@ abstract class Controller{
 
     public function insert($values)
     {
-        $this->model->insert($values);
+        return $this->model->insert($values);
     }
     public function update($condition,$attributesAssoc)
     {
-        $this->model->update($condition,$attributesAssoc);
+        return $this->model->update($condition,$attributesAssoc);
     }
     public function delete($condition)
     {
-        $this->model->update($condition);
+        return $this->model->update($condition);
     }
     public function selectAll()
     {
-        $this->model->selectAll();
+        return $this->model->selectAll();
     }
     public function selectWhere($condition)
     {
-        $this->model->selectWhere($condition);
+        return $this->model->selectWhere($condition);
     }
     public function selectAttributeWhere($attributes,$condition)
     {
-        $this->model->selectAttributeWhere($attributes,$condition);
+        return $this->model->selectAttributeWhere($attributes,$condition);
     }
 
 }
