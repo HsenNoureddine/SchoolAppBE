@@ -1,15 +1,12 @@
 <?php
 
-include_once("./Connection.php");
-include_once("./Models/Model.php");
-include_once("./Models/TableModels.php");
-
-
+include_once("./Autoloader/autoloader.php");
 
 //init
 $c = new Connection();
-
 $c->createDB();
-
-
 //
+
+
+
+?>
