@@ -66,7 +66,6 @@ abstract class Model extends Connection{
         $flag = 0;
         $colNames = $this->getColumnNames();
         $query = "INSERT INTO `".$this->tableName."`(";
-        // `classid`, `name`, `code`, `fee`
         foreach($colNames as $col)
         {
             if($flag)

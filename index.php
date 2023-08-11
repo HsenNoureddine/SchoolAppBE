@@ -11,8 +11,5 @@ $c = new Connection();
 
 $c->createDB();
 
-$m = new Users();
-$res = $m->getColumnNames();
-
 
 //
