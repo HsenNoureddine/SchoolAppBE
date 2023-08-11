@@ -8,7 +8,7 @@ class Connection{
     
     protected $CON;
     
-    private $DBNAME = "SchoolDB";
+    protected $DBNAME = "SchoolDB";
     public function __construct()
     {
         $this->CON = new mysqli($this->HOST, $this->USERNAME, $this->PASSWORD);
