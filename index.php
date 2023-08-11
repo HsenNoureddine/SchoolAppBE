@@ -11,9 +11,8 @@ $c = new Connection();
 
 $c->createDB();
 
-$m = new News();
-$m->getColumnNames();
+$m = new Users();
+$res = $m->getColumnNames();
 
-// $attrb = array("id"=>"2","name"=>"zein","telephone"=>"785883");
 
 //

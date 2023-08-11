@@ -10,17 +10,20 @@ abstract class Model extends Connection{
     }
 
     public function getColumnNames(){
-        // return $this->CON->query("SELECT name FROM sys.columns WHERE object_id = OBJECT_ID('` .$this->tableName. `') ");
         $query = "SHOW COLUMNS FROM " . $this->tableName;
         $result = $this->CON->query($query);
 
+        $columnNames = [];
+
         if ($result) {
             while ($row = $result->fetch_assoc()) {
-                echo $row['Field'] . "<br>";
+                $columnNames[] = $row['Field'];
             }
         } else {
             echo "Query failed.";
         }
+        return $columnNames;
+    
     }
     public function selectAll()
     {
@@ -58,9 +61,30 @@ abstract class Model extends Connection{
         return $this->CON->query($query);
       
     }
-    public function insert()
+    public function insert($values)
     {
+        $flag = 0;
+        $colNames = $this->getColumnNames();
+        $query = "INSERT INTO `".$this->tableName."`(";
+        // `classid`, `name`, `code`, `fee`
+        foreach($colNames as $col)
+        {
+            if($flag)
+                $query .= ",";
+            $query .= "`".$col."`";
+            $flag = 1;
 
+        }
+        $flag = 0;
+        $query .= ") VALUES (";
+        foreach ($values as $val) {
+            if ($flag)
+                $query .= ",";
+            $query .= "'" . $val . "'";
+            $flag = 1;
+        }
+        $query .= ")";
+        return $this->CON->query($query);
     }
     public function delete($condition)
     {
