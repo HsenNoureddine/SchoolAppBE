@@ -2,7 +2,7 @@
 
 abstract class Model extends Connection{
 
-
+    
     protected $tableName;
     public function  __construct(){
         parent::__construct();
