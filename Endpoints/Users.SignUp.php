@@ -6,7 +6,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $data = file_get_contents("php://input");
     $data = json_decode($data,true);
     $result = $userController->insert($data);
-    if($result)echo "sign Up succeeded";
-    else echo "sign Up failed";
+    if($result)echo json_encode("sign Up succeeded");
+    else echo json_encode("sign Up failed");
 }
 ?>
