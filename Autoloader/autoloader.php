@@ -4,33 +4,45 @@ function myAutoLoader($className)
 {
     $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $ext = ".php";
-
+    if(strpos($className, 'Controller'))
+    {
+        $className = substr($className, 0, strpos($className, "Controller"));
+    }
     if($className == "Connection")
     {
         $path = "./";
         if(strpos($url, 'Endpoints'))$path = '../';
         else if(strpos($url, 'Controllers'))$path = '../';
+
         $fullPath = $path  . $className . $ext;
 
         include_once $fullPath;
     }
     else
     {
-        $path = "./Models/";
+        $pathModels = "./Models/";
         $objPath = "./Classes/";
-        if(strpos($url, 'Endpoints') || strpos($url, 'Controllers') )
+        if(strpos($url, 'Endpoints') || strpos($url, 'Controllers'))
         {
-            $path = '../Models/';
+            $pathModels = '../Models/';
+            $pathControllers = '../Controllers/';
             $objPath = "../Classes/";
         }
-        $modelPath = $path . "Model" . $ext;
-        include_once $modelPath;
+        $modelPath = $pathModels . "Model" . $ext;
+        $controllerPath = $pathControllers . "Controller" . $ext;
 
-        $fullPath = $path  . $className . $ext;
+        if($className == "")return;
+
+        include_once $modelPath;
+        include_once $controllerPath;
+
+        $fullPath = $pathModels  . $className . $ext;
         $fullPathObj = $objPath  . $className . $ext;
+        $fullPathController = $pathControllers  . $className . $ext;
 
         include_once $fullPath;
         include_once $fullPathObj;
+        include_once $fullPathController;
 
     }
     

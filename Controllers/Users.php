@@ -11,7 +11,7 @@ class UsersController extends Controller
         $values = $this->sanitizeInputArray($values);
         $email = $values["email"];
         $password = $values["password"];
-        return $this->selectWhere("Where `email` = '$email' and `password` = '$password'");
+        return $this->selectWhere("`email` = '$email' and `password` = '$password'");
     }
     public function signUp($values)
     {
