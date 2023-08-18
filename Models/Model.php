@@ -4,9 +4,14 @@ abstract class Model extends Connection{
 
     
     protected $tableName;
+    protected $object;
     public function  __construct(){
         parent::__construct();
         $this->CON->query("USE `" . $this->DBNAME . "`;");
+
+        // include_once "./Classes/".ucfirst($this->tableName).".php";
+        $obj = $this->tableName. "obj";
+        $this->object = new $obj();
     }
 
     public function getColumnNames(){
@@ -22,6 +27,11 @@ abstract class Model extends Connection{
         } else {
             echo "Query failed.";
         }
+        foreach($columnNames as $col)
+        {
+            echo $col ." ";
+        }
+        echo "<br/>";
         return $columnNames;
     
     }
@@ -32,7 +42,7 @@ abstract class Model extends Connection{
     
     public function selectWhere($condition)
     {
-        if($condition == "")
+        if($condition != "")
             return $this->CON->query("SELECT * FROM `".$this->tableName."` WHERE ".$condition);
         else
             return $this->CON->query("SELECT * FROM `".$this->tableName."`");
@@ -64,7 +74,7 @@ abstract class Model extends Connection{
     public function insert($values)
     {
         $flag = 0;
-        $colNames = $this->getColumnNames();
+        $colNames = array_keys($values);
         $query = "INSERT INTO `".$this->tableName."`(";
         foreach($colNames as $col)
         {

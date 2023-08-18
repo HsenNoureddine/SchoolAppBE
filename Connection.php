@@ -29,7 +29,7 @@ class Connection{
                  $this->CON->query("USE ".$this->DBNAME);
     
                  $this->CON->query("CREATE TABLE USERS(
-                    userid int not null auto_increment,
+                    userid int auto_increment,
                     fullname varchar(20) not null,
                     email varchar(25),
                     password varchar(20) not null,
