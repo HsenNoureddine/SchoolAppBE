@@ -34,7 +34,7 @@ abstract class Controller{
     }
     public function delete($condition)
     {
-        return $this->model->update($condition);
+        return $this->model->delete($condition);
     }
     public function selectAll()
     {
