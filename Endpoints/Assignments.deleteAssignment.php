@@ -8,19 +8,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $condition = "";
     foreach($data as $key=>$value)
     {
-        if(strpos($key,"id"))
-        {
-            $condition .= "`".$key."`=".$value." and ";
-        }
-        else
-        {
-            $condition .= "`".$key."`='".$value."' and ";
-        }
+        $condition .= "`".$key."`='".$value."' and ";
     }
     $condition = substr($condition,0,strlen($condition)-4);
     $result = $assignmentController->delete($condition);
-    if($result)echo json_encode("delete succeeded");
-    else echo json_encode("delete failed");
+    if($result)echo json_encode("delete succeeded ".$result);
+    else echo json_encode("delete failed ".$result);
 }
 /*
 data:
