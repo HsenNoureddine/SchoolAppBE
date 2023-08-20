@@ -30,7 +30,12 @@ class DocumentsController extends Controller{
             if(in_array($fileExt, $valid_extensions))
             {				
                 //check file not exist our upload folder path
-                if(!file_exists($upload_path . $fileName))mkdir($upload_path);
+                if(!file_exists($upload_path))mkdir($upload_path);
+                else if(file_exists($upload_path.$fileName))
+                {
+                    $errorMSG = json_encode(array("message" => "Sorry, file already exists", "status" => false));	
+                    echo $errorMSG;
+                }
                 // check file size '5MB'
                 if($fileSize < 5000000){
                     move_uploaded_file($tempPath, $upload_path . $fileName); // move file from system temporary path to our upload folder path 
