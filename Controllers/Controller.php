@@ -26,10 +26,12 @@ abstract class Controller{
 
     public function insert($values)
     {
+        $values = $this->sanitizeInputArray($values);
         return $this->model->insert($values);
     }
     public function update($condition,$attributesAssoc)
     {
+        $attributesAssoc = $this->sanitizeInputArray($attributesAssoc);
         return $this->model->update($condition,$attributesAssoc);
     }
     public function delete($condition)
@@ -46,6 +48,7 @@ abstract class Controller{
     }
     public function selectAttributeWhere($attributes,$condition)
     {
+        $attributes = $this->sanitizeInputArray($attributes);
         return $this->model->selectAttributeWhere($attributes,$condition);
     }
 

@@ -9,4 +9,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     if($result)echo json_encode("sign Up succeeded");
     else echo json_encode("sign Up failed");
 }
+/*
+data:
+{
+    "email":"Fadel.bayloon@gmail.com",
+    "fullname": "as Bayloon",
+    "password": "2",
+    "usertype": 1
+}
+*/
 ?>

@@ -9,3 +9,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     if($result)echo json_encode("insert succeeded");
     else echo json_encode("insert failed");
 }
+/*
+data:
+{
+    "classid": 1,
+    "date": "2006-09-23", 
+    "assignment": "test assignment"
+}
+*/
+?>
