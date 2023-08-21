@@ -4,14 +4,9 @@ abstract class Model extends Connection{
 
     
     protected $tableName;
-    protected $object;
     public function  __construct(){
         parent::__construct();
         $this->CON->query("USE `" . $this->DBNAME . "`;");
-
-        // include_once "./Classes/".ucfirst($this->tableName).".php";
-        $obj = $this->tableName. "obj";
-        $this->object = new $obj();
     }
 
     public function getColumnNames(){
