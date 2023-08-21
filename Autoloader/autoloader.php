@@ -21,12 +21,10 @@ function myAutoLoader($className)
     else
     {
         $pathModels = "./Models/";
-        $objPath = "./Classes/";
         if(strpos($url, 'Endpoints') || strpos($url, 'Controllers'))
         {
             $pathModels = '../Models/';
             $pathControllers = '../Controllers/';
-            $objPath = "../Classes/";
         }
         $modelPath = $pathModels . "Model" . $ext;
         $controllerPath = $pathControllers . "Controller" . $ext;
@@ -37,11 +35,9 @@ function myAutoLoader($className)
         include_once $controllerPath;
 
         $fullPath = $pathModels  . $className . $ext;
-        $fullPathObj = $objPath  . $className . $ext;
         $fullPathController = $pathControllers  . $className . $ext;
 
         include_once $fullPath;
-        include_once $fullPathObj;
         include_once $fullPathController;
 
     }
