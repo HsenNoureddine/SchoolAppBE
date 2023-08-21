@@ -1,7 +1,0 @@
-login 
-register
-get classes specific userid
-get assignment,calendar,subjects,fees specifc class
-get news,exams,grades... specific subject
-set apis for all tables
-admin apis
