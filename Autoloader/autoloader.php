@@ -11,7 +11,7 @@ function myAutoLoader($className)
     if($className == "Connection")
     {
         $path = "./";
-        if(strpos($url, 'Endpoints'))$path = '../';
+        if(strpos($url, 'Endpoints'))$path = '../../';
         else if(strpos($url, 'Controllers'))$path = '../';
 
         $fullPath = $path  . $className . $ext;
@@ -21,10 +21,15 @@ function myAutoLoader($className)
     else
     {
         $pathModels = "./Models/";
-        if(strpos($url, 'Endpoints') || strpos($url, 'Controllers'))
+        if(strpos($url, 'Controllers'))
         {
             $pathModels = '../Models/';
             $pathControllers = '../Controllers/';
+        }
+        else if(strpos($url, 'Endpoints'))
+        {
+            $pathModels = '../../Models/';
+            $pathControllers = '../../Controllers/';
         }
         $modelPath = $pathModels . "Model" . $ext;
         $controllerPath = $pathControllers . "Controller" . $ext;
