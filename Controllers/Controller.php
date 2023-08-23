@@ -7,7 +7,7 @@ abstract class Controller{
     public function __construct($modelName)
     {
         $this->modelName = $modelName;
-        include_once "../Models/".$modelName.".php";
+        include_once "../../Models/".$modelName.".php";
         $this->model = new $modelName();
     }
 
